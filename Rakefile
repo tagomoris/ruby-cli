@@ -1,3 +1,9 @@
+if ENV["PWD"] != "/home/mruby/code"
+  # rake not in `docker-compose run compile`
+  require "bundler/gem_tasks"
+  task :default => :spec
+end
+
 require 'fileutils'
 
 MRUBY_VERSION="1.2.0"

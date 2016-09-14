@@ -1,3 +1,1 @@
-module RubyCli
-  VERSION = "0.0.1"
-end
+../../lib/ruby-cli/version.rb

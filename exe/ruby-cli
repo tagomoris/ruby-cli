@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << File.expand_path("../../lib", __FILE__)
+
+require 'ruby-cli/version'
+argv = [$0] + ARGV
+
+if argv[1] == "version" || argv[1] == "-v"
+  puts "v#{RubyCLI::VERSION}"
+else
+  puts "Hello World"
+end
