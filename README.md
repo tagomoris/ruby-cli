@@ -1,36 +1,28 @@
-# Ruby::Cli
+# ruby-cli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby/cli`. To experiment with that code, run `bin/console` for an interactive prompt.
+**ruby-cli** is a command line tool to bootstrap a code tree of Ruby, which is released as a gem of [rubygem.org](https://rubygems.org/), and also as an executable binary built by [mruby](https://mruby.org/) using [mruby-cli](https://github.com/hone/mruby-cli).
 
-TODO: Delete this and the text above, and describe your gem
+This tool just does initial setup for such repository. Write your own code on it!
+
+## Prerequisite
+
+Two tools must be installed and be executable in shell.
+
+* CRuby and [bundler](https://rubygems.org/gems/bundler)
+* [mruby-cli](https://github.com/hone/mruby-cli)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+TODO: write this later
 
-```ruby
-gem 'ruby-cli'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ruby-cli
+* download ruby-cli binary from release page (not yet)
+* gem install ruby-cli
 
 ## Usage
 
 TODO: Write usage instructions here
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby-cli.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tagomoris/ruby-cli.
 
