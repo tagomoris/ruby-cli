@@ -26,7 +26,7 @@ module RubyCLI
 
         Dir.chdir project_root_dir
         inject_to_rakefile
-        FileUtils.rmdir_rf cruby_dir_tmp
+        FileUtils.rm_rf cruby_dir_tmp
       ensure
         Dir.chdir original_working_dir
       end
