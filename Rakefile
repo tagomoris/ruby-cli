@@ -4,6 +4,25 @@ if ENV["PWD"] != "/home/mruby/code"
   task :default => :spec
 end
 
+RELEASE_PLATFORMS = %w(i386-apple-darwin14 x86_64-apple-darwin14 i686-pc-linux-gnu x86_64-pc-linux-gnu)
+
+desc "build tarball for releasing on github"
+task :tarball do
+  require_relative 'lib/ruby-cli/version'
+  require 'fileutils'
+  RELEASE_PLATFORMS.each do |platform|
+    project_root = Dir.getwd
+    begin
+      release_filename = "ruby-cli-#{RubyCLI::VERSION}-#{platform}.tgz"
+      Dir.chdir(File.join(project_root, "mruby/build/#{platform}/bin"))
+      sh "tar czf #{release_filename} ruby-cli"
+    ensure
+      Dir.chdir(project_root)
+    end
+    FileUtils.mv("mruby/build/#{platform}/bin/#{release_filename}", "#{release_filename}")
+  end
+end
+
 require 'fileutils'
 
 MRUBY_VERSION="1.2.0"
@@ -16,18 +35,22 @@ end
 
 APP_NAME=ENV["APP_NAME"] || "ruby-cli"
 APP_ROOT=ENV["APP_ROOT"] || Dir.pwd
-# avoid redefining constants in mruby Rakefile
-mruby_root=File.expand_path(ENV["MRUBY_ROOT"] || "#{APP_ROOT}/mruby")
-mruby_config=File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.rb")
-ENV['MRUBY_ROOT'] = mruby_root
-ENV['MRUBY_CONFIG'] = mruby_config
-Rake::Task[:mruby].invoke unless Dir.exist?(mruby_root)
-Dir.chdir(mruby_root)
-load "#{mruby_root}/Rakefile"
+
+def setup_rake_for_mruby
+  # avoid redefining constants in mruby Rakefile
+  mruby_root=File.expand_path(ENV["MRUBY_ROOT"] || "#{APP_ROOT}/mruby")
+  mruby_config=File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.rb")
+  ENV['MRUBY_ROOT'] = mruby_root
+  ENV['MRUBY_CONFIG'] = mruby_config
+  Rake::Task[:mruby].invoke unless Dir.exist?(mruby_root)
+  Dir.chdir(mruby_root)
+  load "#{mruby_root}/Rakefile"
+end
 
 desc "compile binary"
 task :compile => [:all] do
-  %W(#{mruby_root}/build/x86_64-pc-linux-gnu/bin/#{APP_NAME} #{mruby_root}/build/i686-pc-linux-gnu/#{APP_NAME}").each do |bin|
+  setup_rake_for_mruby
+  %W(#{mruby_root}/build/x86_64-pc-linux-gnu/bin/#{APP_NAME} #{mruby_root}/build/i686-pc-linux-gnu/#{APP_NAME}).each do |bin|
     sh "strip --strip-unneeded #{bin}" if File.exist?(bin)
   end
 end
