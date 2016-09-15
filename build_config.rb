@@ -1,6 +1,12 @@
 def gem_config(conf)
   #conf.gembox 'default'
 
+  conf.gem core: 'mruby-symbol-ext'
+  conf.gem mgem: 'mruby-onig-regexp'
+  conf.gem mgem: 'mruby-process'
+  conf.gem mgem: 'mruby-io'
+  conf.gem mgem: 'mruby-dir'
+  conf.gem git: 'https://github.com/gromnitsky/mruby-fileutils-simple.git', branch: 'master'
   # be sure to include this gem (the cli app)
   conf.gem File.expand_path(File.dirname(__FILE__))
 end
@@ -57,38 +63,6 @@ MRuby::CrossBuild.new('i386-apple-darwin14') do |conf|
 
   conf.build_target     = 'i386-pc-linux-gnu'
   conf.host_target      = 'i386-apple-darwin14'
-
-  gem_config(conf)
-end
-
-MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
-  toolchain :gcc
-
-  [conf.cc, conf.linker].each do |cc|
-    cc.command = 'x86_64-w64-mingw32-gcc'
-  end
-  conf.cxx.command      = 'x86_64-w64-mingw32-cpp'
-  conf.archiver.command = 'x86_64-w64-mingw32-gcc-ar'
-  conf.exts.executable  = ".exe"
-
-  conf.build_target     = 'x86_64-pc-linux-gnu'
-  conf.host_target      = 'x86_64-w64-mingw32'
-
-  gem_config(conf)
-end
-
-MRuby::CrossBuild.new('i686-w64-mingw32') do |conf|
-  toolchain :gcc
-
-  [conf.cc, conf.linker].each do |cc|
-    cc.command = 'i686-w64-mingw32-gcc'
-  end
-  conf.cxx.command      = 'i686-w64-mingw32-cpp'
-  conf.archiver.command = 'i686-w64-mingw32-gcc-ar'
-  conf.exts.executable  = ".exe"
-
-  conf.build_target     = 'i686-pc-linux-gnu'
-  conf.host_target      = 'i686-w64-mingw32'
 
   gem_config(conf)
 end

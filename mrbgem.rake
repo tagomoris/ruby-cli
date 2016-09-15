@@ -1,6 +1,6 @@
 MRuby::Gem::Specification.new('ruby-cli') do |spec|
   spec.license = 'MIT'
-  spec.author  = 'MRuby Developer'
+  spec.author  = 'Satoshi Tagomori'
   spec.summary = 'ruby-cli'
   spec.bins    = ['ruby-cli']
 
