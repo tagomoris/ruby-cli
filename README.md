@@ -13,10 +13,9 @@ Two tools must be installed and be executable in shell.
 
 ## Installation
 
-**ruby-cli** itself is released in both of rubygem and binary built with mruby-cli. Both release are available.
+**ruby-cli** is published as executable binary. Download a binary for your system from release page, and use it.
 
 * download ruby-cli binary from release page (not yet)
-* gem install ruby-cli
 
 ## Usage
 
@@ -28,6 +27,14 @@ $ cd myproject
 $ # write your own code...
 $ docker-compose run compile # for mruby-cli binary
 $ rake build                 # for rubygem
+```
+
+## Release
+
+Run these command to make tarballs for releasing this software.
+
+```
+$ rake tarball
 ```
 
 ## Contributing
