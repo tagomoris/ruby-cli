@@ -1,5 +1,4 @@
 require "ruby-cli/version"
-
-module RubyCLI
-  # Your code goes here...
-end
+require "ruby-cli/mruby"
+require "ruby-cli/cruby"
+require "ruby-cli/setup"

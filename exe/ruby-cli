@@ -2,11 +2,14 @@
 
 $LOAD_PATH << File.expand_path("../../lib", __FILE__)
 
-require 'ruby-cli/version'
-argv = [$0] + ARGV
+require 'ruby-cli' # require all files by this
 
-if argv[1] == "version" || argv[1] == "-v"
+arg = ARGV[0]
+
+if arg == "-v"
   puts "v#{RubyCLI::VERSION}"
+elsif arg == "-h"
+  puts "ruby-cli PROJECT_NAME"
 else
-  puts "Hello World"
+  RubyCLI::Setup.execute(arg)
 end
